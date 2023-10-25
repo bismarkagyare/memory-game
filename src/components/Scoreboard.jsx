@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Scoreboard = () => {
+const Scoreboard = ({ score, highScore }) => {
   return (
     <div className="scoreboard-container">
-      <div>Scoreboard</div>
+      <p>Score: {score}</p>
+      <p>HighScore: {highScore}</p>
     </div>
   );
 };

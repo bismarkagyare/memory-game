@@ -7,18 +7,28 @@ import getRandomCharacters from './utils/randomCharacters';
 
 const App = () => {
   const [selected, setSelected] = useState([]);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
   const characters = getRandomCharacters();
 
-  const onSelection = (obj) => (e) => {
+  const onSelection = (character) => (e) => {
     e.preventDefault();
 
     //if the selection already exists
-    if (selected.some((object) => object.name === obj.name)) {
-      return setSelected([]);
+    if (selected.some((selectedChar) => selectedChar.name === character.name)) {
+      //reset the score board
+      setScore(0);
+      //clear the selected characters array
+      setSelected([]);
+      //do nothing
+      return;
     }
 
-    setSelected([...selected, obj]);
+    setScore(score + 1);
+    setSelected([...selected, character]);
+
+    if (score === highScore) setHighScore(highScore + 1);
   };
 
   return (
@@ -27,7 +37,7 @@ const App = () => {
 
       <Cards characters={characters} onSelection={onSelection} />
 
-      <Scoreboard />
+      <Scoreboard score={score} highScore={highScore} />
 
       <video id="background-vid" autoPlay loop poster={backgroundImage}>
         <source src={backgroundVideo} type="video/mp4" />
