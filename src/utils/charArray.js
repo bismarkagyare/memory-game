@@ -1,17 +1,19 @@
+import placeholder from '../assets/400.svg';
+
 const characters = [
-  { name: 'Luffy', image: null },
-  { name: 'Nami', image: null },
-  { name: 'Zoro', image: null },
-  { name: 'Usopp', image: null },
-  { name: 'Sanji', image: null },
-  { name: 'Chopper', image: null },
-  { name: 'Robin', image: null },
-  { name: 'Franky', image: null },
-  { name: 'Brook', image: null },
-  { name: 'Jinbe', image: null },
-  { name: 'Vivi', image: null },
-  { name: 'Zeus', image: null },
-  { name: 'Karoo', image: null },
+  { name: 'Luffy', image: placeholder },
+  { name: 'Nami', image: placeholder },
+  { name: 'Zoro', image: placeholder },
+  { name: 'Usopp', image: placeholder },
+  { name: 'Sanji', image: placeholder },
+  { name: 'Chopper', image: placeholder },
+  { name: 'Robin', image: placeholder },
+  { name: 'Franky', image: placeholder },
+  { name: 'Brook', image: placeholder },
+  { name: 'Jinbe', image: placeholder },
+  { name: 'Vivi', image: placeholder },
+  { name: 'Zeus', image: placeholder },
+  { name: 'Karoo', image: placeholder },
 ];
 
 export default characters;
