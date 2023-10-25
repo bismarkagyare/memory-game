@@ -40,7 +40,7 @@ const App = () => {
 
     const alternatingArray = [];
 
-    while (alternatingArray.length < 10) {
+    while (alternatingArray.length < 8) {
       if (shuffledSelected.length)
         alternatingArray.push(shuffledSelected.pop());
       if (shuffledCharacters.length)
