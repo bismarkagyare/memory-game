@@ -1,0 +1,13 @@
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column: span 2;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.card {
+  width: 8rem;
+  aspect-ratio: 1;
+  background-color: white;
+}
