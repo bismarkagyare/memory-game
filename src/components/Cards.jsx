@@ -6,14 +6,18 @@ const Card = ({ character, onSelection }) => (
   </div>
 );
 
-const Cards = ({ characters, onSelection }) => (
-  <div className="cards-container">
-    <div>
-      {characters.map((character, index) => (
-        <Card key={index} character={character} onSelection={onSelection} />
-      ))}
+const Cards = ({ getRandomChars, onSelection }) => {
+  const randomChars = getRandomChars();
+
+  return (
+    <div className="cards-container">
+      <div>
+        {randomChars.map((character, index) => (
+          <Card key={index} character={character} onSelection={onSelection} />
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Cards;
