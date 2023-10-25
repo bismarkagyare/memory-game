@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import backgroundImage from './assets/background.png';
 import backgroundVideo from './assets/background.mp4';
-import Cards from './components/Cards';
-import Scoreboard from './components/Scoreboard';
-//import getRandomCharacters from './utils/randomCharacters';
+import { Header, Cards, Scoreboard, Footer } from './components';
 import charArray from './utils/charArray';
 
 const App = () => {
@@ -11,8 +9,6 @@ const App = () => {
   const [selected, setSelected] = useState([]);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
-
-  //const characters = getRandomCharacters();
 
   const onSelection = (character) => (e) => {
     e.preventDefault();
@@ -56,13 +52,21 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>One Piece Memory Game</h1>
-
+      <Header />
       <Cards getRandomChars={getRandomChars} onSelection={onSelection} />
 
       <Scoreboard score={score} highScore={highScore} />
 
-      <video id="background-vid" autoPlay loop poster={backgroundImage}>
+      <Footer />
+
+      <video
+        id="background-vid"
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster={backgroundImage}
+      >
         <source src={backgroundVideo} type="video/mp4" />
       </video>
     </div>

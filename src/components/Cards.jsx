@@ -2,7 +2,8 @@ import React from 'react';
 
 const Card = ({ character, onSelection }) => (
   <div className="card" onClick={() => onSelection(character)}>
-    {character.name}
+    <img src={character.image} alt="" />
+    <p>{character.name}</p>
   </div>
 );
 
