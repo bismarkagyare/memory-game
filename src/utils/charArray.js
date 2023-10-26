@@ -1,19 +1,26 @@
-import placeholder from '../assets/400.svg';
+const importAll = async (context) => {
+  const modules = Object.fromEntries(
+    await Promise.all(
+      Object.entries(context).map(async ([path, moduleFn]) => [
+        path,
+        await moduleFn(),
+      ])
+    )
+  );
 
-const characters = [
-  { name: 'Luffy', image: placeholder },
-  { name: 'Nami', image: placeholder },
-  { name: 'Zoro', image: placeholder },
-  { name: 'Usopp', image: placeholder },
-  { name: 'Sanji', image: placeholder },
-  { name: 'Chopper', image: placeholder },
-  { name: 'Robin', image: placeholder },
-  { name: 'Franky', image: placeholder },
-  { name: 'Brook', image: placeholder },
-  { name: 'Jinbe', image: placeholder },
-  { name: 'Vivi', image: placeholder },
-  { name: 'Zeus', image: placeholder },
-  { name: 'Karoo', image: placeholder },
-];
+  return modules;
+};
+
+const imagesContext = import.meta.glob('../assets/characterImages/*.webp');
+const images = await importAll(imagesContext);
+
+const characters = Object.entries(images).map(([path, module]) => {
+  const name = path.match(/\/([^\/]+)\.webp$/)[1];
+
+  return {
+    name: name,
+    image: module.default,
+  };
+});
 
 export default characters;
