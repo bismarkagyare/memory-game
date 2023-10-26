@@ -2,7 +2,7 @@ import { useState } from 'react';
 import backgroundImage from './assets/background.png';
 import backgroundVideo from './assets/background.mp4';
 import { Header, Cards, Scoreboard, Footer } from './components';
-import charArray from './utils/charArray';
+import { charArray } from './utils';
 
 const App = () => {
   const [characters, setCharacters] = useState(charArray);
@@ -10,28 +10,19 @@ const App = () => {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
 
-  const onSelection = (character) => (e) => {
-    e.preventDefault();
+  const onSelection = (character) => {
+    //check if game should reset : if the selection already exists
+    const reset = selected.some(
+      (selectedChar) => selectedChar.name === character.name
+    );
 
-    //if the selection already exists
-    if (selected.some((selectedChar) => selectedChar.name === character.name)) {
-      //reset the score board
-      setScore(0);
-      //clear the selected characters array
-      setSelected([]);
-      //reset characters to initial state
-      setCharacters(charArray);
-      //do nothing
-      return;
-    }
+    setScore(reset ? 0 : score + 1);
+    setSelected(reset ? [] : [...selected, character]);
+    setCharacters(
+      reset ? charArray : [...characters.filter(char.name !== character.name)]
+    );
 
-    setScore(score + 1);
-    setSelected([...selected, character]);
-    setCharacters([
-      ...characters.filter((char) => char.name !== character.name),
-    ]);
-
-    if (score === highScore) setHighScore(highScore + 1);
+    if (score === highScore && !reset) setHighScore(highScore + 1);
   };
 
   const getRandomChars = () => {
@@ -53,10 +44,10 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <Cards getRandomChars={getRandomChars} onSelection={onSelection} />
-
       <Scoreboard score={score} highScore={highScore} />
 
+      <Cards getRandomChars={getRandomChars} onSelection={onSelection} />
+      {/* <Cards characters={characters} selected={selected} onSelection={onSelection} /> */}
       <Footer />
 
       <video
