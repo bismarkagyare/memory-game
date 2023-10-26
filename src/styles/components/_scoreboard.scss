@@ -1,7 +1,21 @@
 .scoreboard-container {
+  display: flex;
+  gap: 1.2rem;
   width: max-content;
   padding: 1rem;
-  justify-self: end;
+  justify-self: center;
   border-radius: 1rem;
   align-self: center;
+
+  p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 9rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-transparent);
+    border-radius: 100vmax;
+    font-size: var(--fs-500);
+    box-shadow: var(--shadow-primary);
+  }
 }

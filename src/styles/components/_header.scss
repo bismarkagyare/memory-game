@@ -1,8 +1,5 @@
 .header {
-  display: flex;
-  align-items: center;
-  width: 200%;
-  font-size: 3rem;
-  background-color: var(--bg-transparent);
-  padding-left: 1rem;
+  justify-self: center;
+  width: 30rem;
+  margin-top: 1rem;
 }

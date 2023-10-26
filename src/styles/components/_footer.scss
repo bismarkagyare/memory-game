@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  grid-column: span 2;
   gap: 0.2rem;
   background: var(--bg-transparent);
   width: fit-content;
@@ -12,6 +11,7 @@
   text-decoration: none;
   color: #000;
   border-radius: 100vmax;
+  font-size: var(--fs-400);
 }
 
 svg {

@@ -1,8 +1,9 @@
 .app {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: min-content 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content 1fr;
   height: 100%;
+  margin: 0 auto;
 
   &::after {
     content: '';
