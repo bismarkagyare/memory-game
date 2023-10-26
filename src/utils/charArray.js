@@ -14,7 +14,7 @@ const importAll = async (context) => {
 const imagesContext = import.meta.glob('../assets/characterImages/*.webp');
 const images = await importAll(imagesContext);
 
-const characters = Object.entries(images).map(([path, module]) => {
+const charArray = Object.entries(images).map(([path, module]) => {
   const name = path.match(/\/([^\/]+)\.webp$/)[1];
 
   return {
@@ -23,4 +23,4 @@ const characters = Object.entries(images).map(([path, module]) => {
   };
 });
 
-export default characters;
+export default charArray;
