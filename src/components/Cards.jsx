@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { wantedArray, getRandomChars } from '../utils';
 
 // const Card = ({ character, onSelection }) => (
 //   <div className="card" onClick={() => onSelection(character)}>
@@ -7,24 +8,29 @@ import React, { useState, useEffect } from 'react';
 //   </div>
 // );
 
-const Cards = ({ getRandomChars, onSelection }) => {
-  const [randomChars, setRandomChars] = useState(getRandomChars());
+const Cards = ({ characters, selected, onSelection }) => {
+  const [randomChars, setRandomChars] = useState([]);
+  const [cardBacks, setCardBacks] = useState([]);
   const [canClick, setCanClick] = useState(true);
-  const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
-    //if its not the first load, then execute code
-    if (!firstLoad) {
-      setTimeout(() => {
-        setRandomChars(getRandomChars());
-      }, 1000);
-    }
-  }, [getRandomChars, firstLoad]);
+    setTimeout(
+      () => {
+        setRandomChars(getRandomChars(selected, characters));
+      },
+      //delay only added if randomChars has elements
+      randomChars.length ? 1000 : 0
+    );
+  }, [characters, selected]);
+
+  // Effect hook to set cardBacks when randomChars change
+  useEffect(() => {
+    setCardBacks(wantedArray.sort(() => Math.random() - 0.5));
+  }, [randomChars]);
 
   const handleClick = (character) => {
     if (!canClick) return;
 
-    setFirstLoad(false);
     setCanClick(false);
 
     document.querySelectorAll('.card').forEach((element) =>
@@ -58,6 +64,7 @@ const Cards = ({ getRandomChars, onSelection }) => {
             key={index}
             className="card"
             onClick={() => handleClick(character)}
+            style={{ '--bg-image': `url(${cardBacks[index]})` }}
           >
             <img src={character.image} alt="" />
             <p>{character.name}</p>
