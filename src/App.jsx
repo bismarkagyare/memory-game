@@ -25,22 +25,6 @@ const App = () => {
     if (score === highScore && !reset) setHighScore(highScore + 1);
   };
 
-  // const getRandomChars = () => {
-  //   const shuffledSelected = [...selected.sort(() => Math.random() - 0.5)];
-  //   const shuffledCharacters = [...characters.sort(() => Math.random() - 0.5)];
-
-  //   const alternatingArray = [];
-
-  //   while (alternatingArray.length < 4) {
-  //     if (shuffledSelected.length)
-  //       alternatingArray.push(shuffledSelected.pop());
-  //     if (shuffledCharacters.length)
-  //       alternatingArray.push(shuffledCharacters.pop());
-  //   }
-
-  //   return alternatingArray.sort(() => Math.random() - 0.5);
-  // };
-
   return (
     <div className="app">
       <Header />
