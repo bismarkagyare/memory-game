@@ -9,6 +9,7 @@ const App = () => {
   const [selected, setSelected] = useState([]);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const [canPlayAudio, setCanPlayAudio] = useState(true);
 
   const onSelection = (character) => {
     //check if game should reset : if the selection already exists
@@ -19,7 +20,9 @@ const App = () => {
     setScore(reset ? 0 : score + 1);
     setSelected(reset ? [] : [...selected, character]);
     setCharacters(
-      reset ? charArray : [...characters.filter(char.name !== character.name)]
+      reset
+        ? charArray
+        : [...characters.filter((char) => char.name !== character.name)]
     );
 
     if (score === highScore && !reset) setHighScore(highScore + 1);
@@ -34,8 +37,9 @@ const App = () => {
         characters={characters}
         selected={selected}
         onSelection={onSelection}
+        canPlayAudio={canPlayAudio}
       />
-      <Footer />
+      <Footer canPlayAudio={canPlayAudio} setCanPlayAudio={setCanPlayAudio} />
 
       <video
         id="background-vid"
