@@ -1,17 +1,26 @@
 import React from 'react';
-import { BsGithub } from 'react-icons/bs';
+import { BsGithub, BsMusicNote } from 'react-icons/bs';
 
-const Footer = () => {
+const Footer = ({ canPlayAudio, setCanPlayAudio }) => {
   return (
-    <a
-      href="https://github.com/BismarkAgyare"
-      className="footer-link"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <p>Bismark Agyare</p>
-      <BsGithub />
-    </a>
+    <div className="footer">
+      <button
+        className="footer-btn"
+        canPlayAudio={canPlayAudio}
+        onClick={() => setCanPlayAudio((prev) => (prev === 0 ? 1 : 0))}
+      >
+        <BsMusicNote />
+      </button>
+      <a
+        href="https://github.com/BismarkAgyare"
+        className="footer-link"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <p>Bismark Agyare</p>
+        <BsGithub />
+      </a>
+    </div>
   );
 };
 
