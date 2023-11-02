@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { wantedArray, getRandomChars } from '../utils';
-
+import sound from '../assets/soundEffects/card-flip.mp3';
 // const Card = ({ character, onSelection }) => (
 //   <div className="card" onClick={() => onSelection(character)}>
 //     <img src={character.image} alt="" />
@@ -8,24 +8,43 @@ import { wantedArray, getRandomChars } from '../utils';
 //   </div>
 // );
 
-const Cards = ({ characters, selected, onSelection }) => {
+const Cards = ({ characters, selected, onSelection, canPlayAudio }) => {
   const [randomChars, setRandomChars] = useState([]);
   const [cardBacks, setCardBacks] = useState([]);
   const [canClick, setCanClick] = useState(true);
+
+  const audioClip = new Audio(sound);
+
+  const playAudioOnUserInteraction = () => {
+    if (canPlayAudio) {
+      audioClip.play();
+      document.removeEventListener('click', playAudioOnUserInteraction);
+    }
+  };
 
   useEffect(() => {
     setTimeout(
       () => {
         setRandomChars(getRandomChars(selected, characters));
+        document.addEventListener('click', playAudioOnUserInteraction);
       },
       //delay only added if randomChars has elements
       randomChars.length ? 1000 : 0
     );
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('click', playAudioOnUserInteraction);
+    };
   }, [characters, selected]);
 
   // Effect hook to set cardBacks when randomChars change
   useEffect(() => {
-    setCardBacks(wantedArray.sort(() => Math.random() - 0.5));
+    setCardBacks(
+      wantedArray
+        .map((module) => module.default)
+        .sort(() => Math.random() - 0.5)
+    );
   }, [randomChars]);
 
   const handleClick = (character) => {
@@ -50,6 +69,7 @@ const Cards = ({ characters, selected, onSelection }) => {
     );
 
     onSelection(character);
+    audioClip.play();
 
     setTimeout(() => {
       setCanClick(true);
