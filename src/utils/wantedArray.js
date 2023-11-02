@@ -1,13 +1,8 @@
 const importAll = async (context) => {
-  const modules = Object.fromEntries(
-    await Promise.all(
-      Object.entries(context).map(async ([path, moduleFn]) => [
-        path,
-        await moduleFn(),
-      ])
-    )
+  const modulePaths = Object.keys(context);
+  const modules = await Promise.all(
+    modulePaths.map(async (path) => await context[path]())
   );
-
   return modules;
 };
 
