@@ -12,11 +12,12 @@ const Cards = ({ characters, selected, onSelection, canPlayAudio }) => {
   const [randomChars, setRandomChars] = useState([]);
   const [cardBacks, setCardBacks] = useState([]);
   const [canClick, setCanClick] = useState(true);
+  const [firstLoad, setFirstLoad] = useState(true);
 
   const audioClip = new Audio(sound);
 
   const playAudioOnUserInteraction = () => {
-    if (canPlayAudio) {
+    if (canPlayAudio && !firstLoad) {
       audioClip.play();
       document.removeEventListener('click', playAudioOnUserInteraction);
     }
@@ -27,6 +28,7 @@ const Cards = ({ characters, selected, onSelection, canPlayAudio }) => {
       () => {
         setRandomChars(getRandomChars(selected, characters));
         document.addEventListener('click', playAudioOnUserInteraction);
+        setFirstLoad(false);
       },
       //delay only added if randomChars has elements
       randomChars.length ? 1000 : 0
